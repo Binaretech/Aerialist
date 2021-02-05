@@ -1,5 +1,7 @@
 # aerialist
 
+![flutter](https://github.com/Binaretech/Aerealist/workflows/flutter/badge.svg)
+
 Epub reader
 
 ## Getting Started
