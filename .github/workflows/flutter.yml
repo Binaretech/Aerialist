@@ -1,4 +1,4 @@
-name: TEST FLUTTER APP
+name: flutter
 on: [push, pull_request]
 jobs:
   tests:
