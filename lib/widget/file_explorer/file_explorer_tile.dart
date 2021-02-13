@@ -1,5 +1,8 @@
 part of 'file_explorer.dart';
 
+/// List tile for file explorer
+///
+/// Handle selection, directory opening, and selection status
 class FileExplorerTile extends StatelessWidget {
   FileExplorerTile(
       {this.entity, this.selected = false, this.onOpen, this.onSelect});

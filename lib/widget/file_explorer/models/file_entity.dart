@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:path/path.dart' as pathpkg;
 
+/// Utility class to handle paths in filesystem
 class FileEntity {
   FileEntity(this.name, this.path, this.type);
 

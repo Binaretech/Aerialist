@@ -10,20 +10,34 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart' as localization;
 
 part 'file_explorer_tile.dart';
 
+/// FileExplorer
+///
+/// Dialog that display the available storages and browse
+/// into its directories
 class FileExplorer extends StatefulWidget {
   FileExplorer({this.onAccept, this.filter = const []});
 
+  /// When the user tap on the check button
   final void Function(List<String>) onAccept;
+
+  /// Filter file extentions
   final List<String> filter;
+
   @override
   _FileExplorerState createState() => _FileExplorerState();
 }
 
 class _FileExplorerState extends State<FileExplorer> {
+  /// FileSystemEntities found
   List<FileEntity> entities = [];
+
+  /// Loading flag
   bool loading = true;
+
+  /// Available storages
   List<Directory> baseDirectories = [];
 
+  /// User selected paths
   Set<String> selectedPaths = Set();
 
   @override
@@ -36,42 +50,56 @@ class _FileExplorerState extends State<FileExplorer> {
       }
 
       baseDirectories = await getStorageDirectories();
-      _loadDirectory(baseDirectories.first);
+      loadDirectory(baseDirectories.first);
     });
   }
 
-  void _loadDirectory(Directory directory) async {
-    List<FileEntity> entities = await directory
-        .list(followLinks: true)
-        .asyncMap((entity) => FileEntity.fromFileSystemEntity(entity))
-        .where((entity) {
-      if (!entity.isDirectory) {
-        return widget.filter.contains(entity.extention);
+  /// Receive a directory and load its children into [entities]
+  void loadDirectory(Directory directory) async {
+    try {
+      List<FileEntity> entities = await directory
+          .list(followLinks: true)
+          .asyncMap((entity) => FileEntity.fromFileSystemEntity(entity))
+          .where((entity) {
+        if (!entity.isDirectory) {
+          return widget.filter.contains(entity.extention);
+        }
+        return true;
+      }).toList();
+
+      if (!inBaseDirs(directory)) {
+        entities.insert(
+            0,
+            FileEntity(
+                '..', directory.parent.path, FileSystemEntityType.directory));
       }
-      return true;
-    }).toList();
 
-    if (!inBaseDirs(directory)) {
-      entities.insert(
-          0,
-          FileEntity(
-              '..', directory.parent.path, FileSystemEntityType.directory));
+      setState(() {
+        loading = false;
+        this.entities = entities;
+      });
+    } catch (error) {
+      setState(() {
+        loading = false;
+      });
     }
-
-    setState(() {
-      loading = false;
-      this.entities = entities;
-    });
   }
 
+  /// On open directory event
+  ///
+  /// Receive a path and load its children into [entities]
   void openDirectory(String path) {
     setState(() {
       loading = true;
     });
 
-    _loadDirectory(Directory(path));
+    loadDirectory(Directory(path));
   }
 
+  /// On select file event
+  ///
+  /// Receive the file path and if the path aready exists into [selectedPaths]
+  /// it will be removed, otherwise it will be stored
   void onSelect(String path) {
     setState(() {
       if (selectedPaths.contains(path)) {
@@ -83,6 +111,8 @@ class _FileExplorerState extends State<FileExplorer> {
     });
   }
 
+  /// Returns true if the given directory is one of the
+  /// available storages root path
   bool inBaseDirs(Directory directory) {
     for (Directory baseDir in baseDirectories) {
       if (path.equals(directory.path, baseDir.path)) {
@@ -93,6 +123,7 @@ class _FileExplorerState extends State<FileExplorer> {
     return false;
   }
 
+  /// On user accept event
   void onAccept() {
     widget.onAccept(selectedPaths.toList());
     Navigator.of(context).pop();
@@ -130,7 +161,7 @@ class _FileExplorerState extends State<FileExplorer> {
                   ),
                 )
                 .toList(),
-            onTap: (index) => _loadDirectory(baseDirectories[index]),
+            onTap: (index) => loadDirectory(baseDirectories[index]),
           ),
         ),
         body: loading

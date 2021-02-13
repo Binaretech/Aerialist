@@ -25,9 +25,7 @@ class Aerialist extends StatelessWidget {
       title: 'Aerialist',
       theme: state.theme,
       home: Scaffold(
-        body: Container(
-          child: Test(),
-        ),
+        body: Container(),
       ),
     );
   }
@@ -38,29 +36,6 @@ class Aerialist extends StatelessWidget {
       create: (context) => ThemeBloc(),
       child: BlocBuilder<ThemeBloc, ThemeState>(
         builder: (context, state) => _materialApp(state),
-      ),
-    );
-  }
-}
-
-class Test extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: ElevatedButton(
-        child: Text("test"),
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => FileExplorer(
-                onAccept: (list) => print(list),
-                filter: ['epub'],
-              ),
-              fullscreenDialog: true,
-            ),
-          );
-        },
       ),
     );
   }
