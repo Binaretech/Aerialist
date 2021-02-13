@@ -2,6 +2,17 @@
   "helloWorld": "Hello World!",
   "@helloWorld": {
     "description": "The conventional newborn programmer greeting"
+  },
+	"selectFiles": "Select files",
+	"@selectFiles": {
+		"description": "File explorer title"
+	},
+ "selectedFiles" : "{count, plural, zero{} one{1 selected} other{{count} selected}}",
+  "@selectedFiles" : {
+      "description" : "selected files",
+      "placeholders": {
+          "count": {}
+      }
   }
 }
 
