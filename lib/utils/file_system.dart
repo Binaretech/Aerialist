@@ -1,6 +1,8 @@
 import 'dart:io';
+import 'package:flutter/material.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart' as pathProvider;
+import 'package:flutter_gen/gen_l10n/app_localizations.dart' as localization;
 
 /// Returns a list of the available mounted storages
 Future<List<Directory>> getStorageDirectories() async {
@@ -29,9 +31,11 @@ Future<List<String>> searchEpubs() async {
 /// Return a user friendly name for storage path
 ///
 /// Only works propperly in android
-String storageName(String path) {
+String storageName(String path, BuildContext context) {
   if (Platform.isAndroid) {
-    return path.contains('emulated') ? 'Internal shared storage' : 'sdcard';
+    return path.contains('emulated')
+        ? localization.AppLocalizations.of(context).internalSharedStorage
+        : 'SDcard';
   }
 
   return path;

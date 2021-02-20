@@ -156,7 +156,7 @@ class _FileExplorerState extends State<FileExplorer> {
                   (dir) => Container(
                     padding: EdgeInsets.symmetric(vertical: 16),
                     child: Text(
-                      storageName(dir.path),
+                      storageName(dir.path, context),
                     ),
                   ),
                 )

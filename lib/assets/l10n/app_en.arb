@@ -1,7 +1,7 @@
 {
-  "helloWorld": "Hello World!",
-  "@helloWorld": {
-    "description": "The conventional newborn programmer greeting"
+  "internalSharedStorage": "Internal shared storage",
+  "@internalSharedStorage": {
+    "description": "internal storage"
   },
 	"selectFiles": "Select files",
 	"@selectFiles": {
