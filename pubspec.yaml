@@ -30,10 +30,10 @@ dependencies:
   flutter_bloc: ^6.0.0
 
   path_provider: ^1.6.27
-  shared_preferences: ^0.5.12+4
+  shared_preferences: '>=0.5.12+4 <2.0.0'
 
   permission_handler: ^5.1.0+2
-  # flutter_html: ^1.2.0
+  flutter_html: ^1.2.0
   epub: ^2.1.0
 
   equatable: ^1.2.5
