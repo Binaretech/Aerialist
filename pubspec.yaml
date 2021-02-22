@@ -30,7 +30,11 @@ dependencies:
   flutter_bloc: ^6.0.0
 
   path_provider: ^1.6.27
-  shared_preferences: ^0.5.12+4
+  shared_preferences: '>=0.5.12+4 <2.0.0'
+
+  permission_handler: ^5.1.0+2
+  flutter_html: ^1.2.0
+  epub: ^2.1.0
 
   equatable: ^1.2.5
 
@@ -40,9 +44,14 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.0
 
+dependency_overrides:
+  xml: ^4.2.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
+ 
+  mockito: ^4.1.4
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
