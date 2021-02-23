@@ -1,4 +1,5 @@
 import 'package:Aerialist/config/themes/bloc/theme_bloc.dart';
+import 'package:Aerialist/widget/file_explorer/file_explorer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -23,7 +24,9 @@ class Aerialist extends StatelessWidget {
       ],
       title: 'Aerialist',
       theme: state.theme,
-      home: Container(),
+      home: Scaffold(
+        body: Container(),
+      ),
     );
   }
 

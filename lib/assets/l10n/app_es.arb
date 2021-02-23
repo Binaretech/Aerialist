@@ -1,4 +1,6 @@
 {
-  "helloWorld": "Hola Mundo!"
+  "internalSharedStorage": "Almacenamiento interno",
+	"selectFiles": "Seleccionar archivos",
+ "selectedFiles" : "{count, plural, zero{} one{1 seleccionado} other{{count} seleccionados}}"
 }
 
