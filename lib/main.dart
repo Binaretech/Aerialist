@@ -1,5 +1,4 @@
 import 'package:Aerialist/config/themes/bloc/theme_bloc.dart';
-import 'package:Aerialist/modules/reader/screens/reader_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -24,8 +23,7 @@ class Aerialist extends StatelessWidget {
       ],
       title: 'Aerialist',
       theme: state.theme,
-      home: ReaderView(
-          '/storage/emulated/0/Download/German All-in-One For Dummies by Consumer Dummies.epub'),
+      home: Scaffold(),
     );
   }
 

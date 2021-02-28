@@ -25,6 +25,7 @@ class ReaderBloc extends Bloc<ReaderEvent, ReaderState> {
   Future<ReaderState> mapLoadBookEventToState(LoadBookEvent event) async {
     final bookRef =
         await EpubReader.openBook(await File(event.path).readAsBytes());
-    return ReaderLoadedState(bookRef.Title, await bookRef.getChapters(), 0);
+    return ReaderLoadedState(
+        bookRef, bookRef.Title, await bookRef.getChapters(), 3);
   }
 }

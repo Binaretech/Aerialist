@@ -1,11 +1,12 @@
 import 'package:epub/epub.dart';
 import 'package:flutter/material.dart';
 
+/// Display the chapter as a list tile or as a expandable if the given
+/// chapter has subchapters
 class ChapterTile extends StatelessWidget {
-  ChapterTile({@required this.chapter, this.isSubChapter = false});
+  ChapterTile({@required this.chapter});
 
   final EpubChapterRef chapter;
-  final bool isSubChapter;
 
   @override
   Widget build(BuildContext context) {
