@@ -6,7 +6,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart' as localization;
 
 /// Returns a list of the available mounted storages
 Future<List<Directory>> getStorageDirectories() async {
-  return (await pathProvider.getExternalStorageDirectories())
+  return (await pathProvider.getExternalStorageDirectories())!
       .map((directory) => Directory(directory.path.split('Android').first))
       .toList();
 }
@@ -34,7 +34,7 @@ Future<List<String>> searchEpubs() async {
 String storageName(String path, BuildContext context) {
   if (Platform.isAndroid) {
     return path.contains('emulated')
-        ? localization.AppLocalizations.of(context).internalSharedStorage
+        ? localization.AppLocalizations.of(context)!.internalSharedStorage
         : 'SDcard';
   }
 

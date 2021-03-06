@@ -15,7 +15,7 @@ part 'file_explorer_tile.dart';
 /// Dialog that display the available storages and browse
 /// into its directories
 class FileExplorer extends StatefulWidget {
-  FileExplorer({this.onAccept, this.filter = const []});
+  FileExplorer({required this.onAccept, this.filter = const ['epub']});
 
   /// When the user tap on the check button
   final void Function(List<String>) onAccept;
@@ -79,6 +79,7 @@ class _FileExplorerState extends State<FileExplorer> {
         this.entities = entities;
       });
     } catch (error) {
+      print(error);
       setState(() {
         loading = false;
       });
@@ -125,13 +126,13 @@ class _FileExplorerState extends State<FileExplorer> {
 
   /// On user accept event
   void onAccept() {
-    widget.onAccept(selectedPaths.toList());
     Navigator.of(context).pop();
+    widget.onAccept(selectedPaths.toList());
   }
 
   @override
   Widget build(BuildContext context) {
-    final locale = localization.AppLocalizations.of(context);
+    final locale = localization.AppLocalizations.of(context)!;
 
     return DefaultTabController(
       length: baseDirectories.length,

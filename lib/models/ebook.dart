@@ -1,12 +1,17 @@
 import 'package:equatable/equatable.dart';
 
 class Ebook extends Equatable {
-  const Ebook({this.title, this.path, this.author, this.cover});
+  const Ebook({
+    required this.title,
+    required this.path,
+    required this.author,
+    this.cover,
+  });
 
   final String title;
   final String path;
   final String author;
-  final String cover;
+  final String? cover;
 
   Ebook.fromMap(Map<String, dynamic> rawBook)
       : this.title = rawBook['title'],
@@ -15,7 +20,7 @@ class Ebook extends Equatable {
         this.cover = rawBook['cover'];
 
   @override
-  List<Object> get props => [title, path, author, cover];
+  List<Object> get props => [title, path, author];
 
   Map toJson() => {
         'title': title,

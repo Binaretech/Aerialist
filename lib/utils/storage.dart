@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:Aerialist/models/ebook.dart';
-import 'package:epub/epub.dart';
+import 'package:epubx/epubx.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:path_provider/path_provider.dart' as provider;
 import 'package:path/path.dart' show join;
@@ -13,7 +13,11 @@ import 'package:path/path.dart' show join;
 Future<List<Ebook>> getStoredBooks() async {
   SharedPreferences preferences = await SharedPreferences.getInstance();
 
-  final books = jsonDecode(preferences.getString('books')) as List;
+  final storedString = preferences.getString('books');
+
+  if (storedString == null) return List.empty();
+
+  final books = jsonDecode(storedString) as List;
 
   return books.map((rawBook) => Ebook.fromMap(Map.from(rawBook))).toList();
 }
@@ -25,7 +29,8 @@ Future<List<Ebook>> getStoredBooks() async {
 void storeBooks(List<String> paths) async {
   SharedPreferences preferences = await SharedPreferences.getInstance();
 
-  List<Ebook> books = await getStoredBooks().catchError(() => []);
+  List<Ebook> books =
+      await getStoredBooks().catchError(() => List<Ebook>.empty());
 
   for (String path in paths) {
     books.add(await readEbookPath(path));
@@ -42,20 +47,20 @@ Future<Ebook> readEbookPath(String path) async {
   final epubRef = await EpubReader.openBook(await File(path).readAsBytes());
 
   final cover = await epubRef.readCover();
-  String coverPath;
+  String? coverPath;
 
   if (cover != null) {
     final documentsDirectory =
-        (await provider.getApplicationDocumentsDirectory())?.path;
+        (await provider.getApplicationDocumentsDirectory()).path;
 
     final file = File(join(documentsDirectory, path));
     coverPath = (await file.writeAsBytes(cover.getBytes())).path;
   }
 
   return Ebook(
-    title: epubRef.Title,
+    title: epubRef.Title!,
     path: path,
-    author: epubRef.Author,
+    author: epubRef.Author!,
     cover: coverPath,
   );
 }

@@ -13,18 +13,15 @@ class ReaderLoadingState extends ReaderState {
 
 class ReaderLoadedState extends ReaderState {
   ReaderLoadedState(this.bookRef, this.title, this.chapters,
-      [this.currentChapterIndex = 0, this.currentSubchapter]);
+      [this.currentChapterIndex = 0]);
 
   final String title;
   final List<EpubChapterRef> chapters;
   final int currentChapterIndex;
-  final int currentSubchapter;
   final EpubBookRef bookRef;
 
   @override
   List<Object> get props => [title];
 
-  EpubChapterRef get currentChapter => currentSubchapter != null
-      ? chapters[currentChapterIndex].SubChapters[currentSubchapter]
-      : chapters[currentChapterIndex];
+  EpubChapterRef get currentChapter => chapters[currentChapterIndex];
 }
