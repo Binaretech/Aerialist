@@ -1,5 +1,7 @@
 import 'package:Aerialist/config/themes/bloc/theme_bloc.dart';
 import 'package:Aerialist/modules/reader/screens/reader_view.dart';
+import 'package:Aerialist/widget/app_bar/my_app_bar.dart';
+import 'package:Aerialist/widget/drawer/my_drawer.dart';
 import 'package:Aerialist/widget/file_explorer/file_explorer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -26,6 +28,8 @@ class Aerialist extends StatelessWidget {
       title: 'Aerialist',
       theme: state.theme,
       home: Scaffold(
+        appBar: MyAppBar(),
+        drawer: MyDrawer(),
         body: Test(),
       ),
     );
@@ -43,19 +47,20 @@ class Aerialist extends StatelessWidget {
 }
 
 class Test extends StatelessWidget {
+  void onPressed(BuildContext context) {
+    Navigator.of(context).push(MaterialPageRoute(
+        builder: (context) => FileExplorer(onAccept: (paths) {
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => ReaderView(bookPath: paths.first)));
+            }),
+        fullscreenDialog: true));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Center(
       child: ElevatedButton(
-        onPressed: () {
-          Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) => FileExplorer(onAccept: (paths) {
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) =>
-                            ReaderView(bookPath: paths.first)));
-                  }),
-              fullscreenDialog: true));
-        },
+        onPressed: () => onPressed(context),
         child: Text("Select file"),
       ),
     );

@@ -1,4 +1,8 @@
 {
+  "drawerLibrary": "Library",
+  "@drawerLibrary": {
+    "description": "Library option"
+  },
   "internalSharedStorage": "Internal shared storage",
   "@internalSharedStorage": {
     "description": "internal storage"
