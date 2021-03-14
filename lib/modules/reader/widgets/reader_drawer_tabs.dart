@@ -1,10 +1,10 @@
 import 'package:Aerialist/modules/reader/widgets/chapter_list.dart';
 import 'package:Aerialist/modules/reader/widgets/reader_drawer_tab_bar.dart';
-import 'package:epub/epub.dart';
+import 'package:epubx/epubx.dart';
 import 'package:flutter/material.dart';
 
 class ReaderDrawerTabs extends StatelessWidget {
-  ReaderDrawerTabs({@required this.chapters});
+  ReaderDrawerTabs({required this.chapters});
 
   final List<EpubChapterRef> chapters;
 

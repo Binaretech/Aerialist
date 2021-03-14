@@ -4,8 +4,12 @@ part of 'file_explorer.dart';
 ///
 /// Handle selection, directory opening, and selection status
 class FileExplorerTile extends StatelessWidget {
-  FileExplorerTile(
-      {this.entity, this.selected = false, this.onOpen, this.onSelect});
+  FileExplorerTile({
+    required this.entity,
+    this.selected = false,
+    required this.onOpen,
+    required this.onSelect,
+  });
 
   final FileEntity entity;
   final bool selected;

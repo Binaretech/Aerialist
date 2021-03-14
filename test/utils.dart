@@ -44,7 +44,7 @@ class MockPathProviderPlatform extends Mock
   }
 
   Future<List<String>> getExternalStoragePaths({
-    StorageDirectory type,
+    StorageDirectory? type,
   }) async {
     return <String>[kExternalStoragePath];
   }

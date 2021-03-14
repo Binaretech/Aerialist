@@ -5,14 +5,14 @@ import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_html/html_parser.dart';
 
 class HtmlRenderer extends StatelessWidget {
-  HtmlRenderer({this.data});
+  HtmlRenderer({required this.data});
 
   final String data;
 
-  Widget Function(RenderContext, Widget, Map<String, String>, Element)
+  Widget Function(RenderContext, Widget, Map<String, String>, Element?)
       imgRenderer(ReaderLoadedState state) {
     return (context, child, attributes, element) {
-      final image = state.bookRef.Content.Images[attributes['src']]
+      final image = state.bookRef.Content!.Images![attributes['src']]!
           .getContentFileEntry()
           .content;
       return Image.memory(image);
@@ -23,21 +23,13 @@ class HtmlRenderer extends StatelessWidget {
   Widget build(BuildContext context) {
     final state = ReaderBloc.of(context).state as ReaderLoadedState;
 
-    return Html(
-      data: data,
-      customRender: {
-        'body': (context, child, attr, element) {
-          print(child.runtimeType);
-          return SizedBox(
-            height: Size.infinite.height,
-            width: Size.infinite.width,
-            child: PageView(
-              children: [child],
-            ),
-          );
+    return SingleChildScrollView(
+      child: Html(
+        data: data,
+        customRender: {
+          'img': imgRenderer(state),
         },
-        'img': imgRenderer(state),
-      },
+      ),
     );
   }
 }

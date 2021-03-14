@@ -10,7 +10,7 @@ part 'reader_scaffold.dart';
 ///
 /// [bookPath] is the path in filesystem of the ebook to show
 class ReaderView extends StatelessWidget {
-  ReaderView({@required this.bookPath});
+  ReaderView({required this.bookPath});
 
   final String bookPath;
 

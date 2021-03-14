@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:bloc/bloc.dart';
-import 'package:epub/epub.dart';
+import 'package:epubx/epubx.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -26,6 +26,6 @@ class ReaderBloc extends Bloc<ReaderEvent, ReaderState> {
     final bookRef =
         await EpubReader.openBook(await File(event.path).readAsBytes());
     return ReaderLoadedState(
-        bookRef, bookRef.Title, await bookRef.getChapters(), 3);
+        bookRef, bookRef.Title!, await bookRef.getChapters());
   }
 }

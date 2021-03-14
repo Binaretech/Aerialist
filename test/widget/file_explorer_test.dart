@@ -15,7 +15,10 @@ class TestWidget extends StatelessWidget {
       child: Text('test'),
       onPressed: () {
         Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) => FileExplorer(), fullscreenDialog: true));
+            builder: (context) => FileExplorer(
+                  onAccept: (list) {},
+                ),
+            fullscreenDialog: true));
       },
     );
   }
@@ -39,8 +42,6 @@ void main() {
 
       await tester.pump();
       await tester.pump();
-
-      verify(observer.didPush(any, any));
 
       expect(find.byType(FileExplorer), findsOneWidget);
       expect(find.byType(LinearProgressIndicator), findsOneWidget);
